@@ -6,7 +6,7 @@
 /*   By: leandrodias <leandrodias@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:57:26 by leandrodias       #+#    #+#             */
-/*   Updated: 2025/06/10 16:23:06 by leandrodias      ###   ########.fr       */
+/*   Updated: 2025/06/10 16:56:54 by leandrodias      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,29 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 
+# define WIN_NAME "Cub3D"
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
 
 #define ESC_KEY 65307
 #define KEY_ARROW_RIGHT 100
 #define KEY_ARROW_LEFT 97
 #define KEY_ARROW_UP 119
 #define KEY_ARROW_DOWN 115
+
+
+typedef struct s_cub3d
+{
+    void    *mlx;
+    void    *win;
+    int     width;
+    int     height;
+    char    **map;
+    int     player_x;
+    int     player_y;
+    int     player_dir; // 0: North, 1: East, 2: South, 3: West
+} t_cub3d;
+
+int    start_game(t_cub3d *game);
 
 #endif
