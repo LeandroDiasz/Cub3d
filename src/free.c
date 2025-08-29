@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpires-n <jpires-n@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-29 20:29:24 by jpires-n          #+#    #+#             */
-/*   Updated: 2025-08-29 20:29:24 by jpires-n         ###   ########.rio      */
+/*   Created: 2025-08-29 19:23:37 by jpires-n          #+#    #+#             */
+/*   Updated: 2025-08-29 19:23:37 by jpires-n         ###   ########.rio      */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "../includes/cub3d.h"
 
-# include "cub3d.h"
+void	multi_free(void *first, ...)
+{
+	va_list	args;
+	void	*ptr;
 
-# define WALL '1'
-# define FLOOR '0'
-# define PLAYER 'P'
-
-int	is_valid_neighbor(char c);
-int	check_neighbor(char **map, int x, int y);
-int	check_wall(char **map);
-int	check_elements(char **map);
-
-#endif
+	va_start(args, first);
+	ptr = first;
+	while (ptr)
+	{
+		free(ptr);
+		ptr = va_arg(args, void *);
+	}
+	va_end(args);
+}

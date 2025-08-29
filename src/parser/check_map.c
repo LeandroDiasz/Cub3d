@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpires-n <jpires-n@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-29 19:51:23 by jpires-n          #+#    #+#             */
+/*   Updated: 2025-08-29 19:51:23 by jpires-n         ###   ########.rio      */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parser.h"
 
 static int	check_border(char **map)
@@ -9,62 +21,82 @@ int	check_wall(char **map)
 {
 	int		x;
 	int		y;
+	int		len;
+
 
 	while (map[x])
 	{
 		x = 0;
+		if (map[0] == FLOOR) //só checa a primeira linha, precisamos checar todas as bordas
+		{
+			printf("Error: Map not enclosed by walls at top border\n");
+			return (0);
+		}
+		y = 0;
 		while (map[x][y])
 		{
 			if (map[x][y] == FLOOR)
 			{
-				if (map[x + 1][y] != WALL || map[x - 1][y] != WALL || map[x][y + 1] != WALL || map[x][y - 1] != WALL)
+				if (map[x][y] == len)
+				if (!check_neighbor(map, x, y))
 					return (0);
 			}
-			else if (map[x][y] != WALL && map[x][y] != FLOOR)
+			else if ((map[x][y] != WALL) && (map[x][y] != FLOOR) && (map[x][y] != PLAYER))
 			{
-				ft_printf("Error: Invalid character '%c' in map\n", map[x][y]);
+				printf("Error: Invalid character '%c' in map\n", map[x][y]);
 				return (0);
 			}
+			y++;
 		}
 		x++;
 	}
 }
 
-int	check_elements(char **map)
+int	is_valid_neighbor(char c)
 {
-	int	i;
-	int	j;
-	int	exit;
-	int	player;
-	int	collectibles;
+	return (c == WALL || c == FLOOR || c == PLAYER);
+}
 
-	j = 0;
-	exit = 0;
-	player = 0;
-	collectibles = 0;
-	while (map[j])
-	{
-		i = 0;
-		while (map[j][i])
-		{
-			if (!check_aux(map[j][i], &exit, &player, &collectibles))
-				return (0);
-			i++;
-		}
-		j++;
-	}
-	if (player != 1 || exit != 1 || collectibles == 0)
+int	check_neighbor(char **map, int x, int y)
+{
+	if (x > 0 && !is_valid_neighbor(map[x - 1][y]))
+		return (0);
+	if (map[x + 1] && !is_valid_neighbor(map[x + 1][y]))
+		return (0);
+	if (y > 0 && !is_valid_neighbor(map[x][y - 1]))
+		return (0);
+	if (map[x][y + 1] && !is_valid_neighbor(map[x][y + 1]))
 		return (0);
 	return (1);
 }
 
-int	check_aux(char element, int *exit, int *player, int *collectibles)
+int	check_elements(char **map)
 {
-	if (element == EXIT)
-		(*exit)++;
-	else if (element == COLLECT)
-		(*collectibles)++;
-	else if (element == PLAYER)
+	int	y;
+	int	x;
+	int	player;
+
+	x = 0;
+	player = 0;
+	while (map[x])
+	{
+		y = 0;
+		while (map[x][y])
+		{
+			if (!check_aux(map[x][y], &player))
+				return (0);
+			y++;
+		}
+		x++;
+	}
+	if (player != 1 || exit != 1)
+		return (0);
+	return (1);
+}
+
+int	check_aux(char element, int *player)
+{
+	if (element == PLAYER)
 		(*player)++;
 	else if (element != FLOOR && element != WALL)
 		return (0);

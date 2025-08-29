@@ -16,35 +16,39 @@
 # include "minilibx-linux/mlx.h"
 # include "Libft/libft.h"
 # include <stdio.h>
+# include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <math.h>
+# include "parser.h"
 
 # define WIN_NAME "Cub3D"
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
 
-#define ESC_KEY 65307
-#define KEY_ARROW_RIGHT 100
-#define KEY_ARROW_LEFT 97
-#define KEY_ARROW_UP 119
-#define KEY_ARROW_DOWN 115
+# define ESC_KEY 65307
+# define KEY_ARROW_RIGHT 100
+# define KEY_ARROW_LEFT 97
+# define KEY_ARROW_UP 119
+# define KEY_ARROW_DOWN 115
 
 
 typedef struct s_cub3d
 {
-    void    *mlx;
-    void    *win;
-    int     width;
-    int     height;
-    char    **map;
-    int     player_x;
-    int     player_y;
-    int     player_dir; // 0: North, 1: East, 2: South, 3: West
-} t_cub3d;
+	void	*mlx;
+	void	*win;
+	int		width;
+	int		height;
+	char	**map;
+	int		player_x;
+	int		player_y;
+	int		player_dir; // 0: North, 1: East, 2: South, 3: West
+}	t_cub3d;
 
-int    start_game(t_cub3d *game);
+int		start_game(t_cub3d *game);
+void	multi_free(void *first, ...);
 
 #endif
