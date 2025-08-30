@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: leandrodias <leandrodias@student.42.fr>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/06/10 16:16:12 by leandrodias       #+#    #+#              #
-#    Updated: 2025/06/10 16:29:03 by leandrodias      ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = Cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -18,6 +6,9 @@ MLX = -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm minilibx-linux/libmlx.a $(LI
 
 LIBFT_DIR = Libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
+
+SRC_DIR = src/
+MAP_DIR = $(SRC_DIR)map
 
 SRC = main.c
 OBJ = $(SRC:.c=.o)
