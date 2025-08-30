@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpires-n <jpires-n@student.42.fr>          #+#  +:+       +#+        */
+/*   By: ledias-d <ledias-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-29 19:51:23 by jpires-n          #+#    #+#             */
-/*   Updated: 2025-08-29 19:51:23 by jpires-n         ###   ########.rio      */
+/*   Created: 2025/08/29 19:51:23 by jpires-n          #+#    #+#             */
+/*   Updated: 2025/08/29 18:33:12 by ledias-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parser.h"
-
-static int	check_border(char **map)
-{
-
-}
 
 int	check_wall(char **map)
 {
@@ -23,24 +18,14 @@ int	check_wall(char **map)
 	int		y;
 	int		len;
 
-
+	x = 0;
 	while (map[x])
 	{
-		x = 0;
-		if (map[0] == FLOOR) //só checa a primeira linha, precisamos checar todas as bordas
-		{
-			printf("Error: Map not enclosed by walls at top border\n");
-			return (0);
-		}
-		y = 0;
 		while (map[x][y])
 		{
 			if (map[x][y] == FLOOR)
-			{
-				if (map[x][y] == len)
 				if (!check_neighbor(map, x, y))
 					return (0);
-			}
 			else if ((map[x][y] != WALL) && (map[x][y] != FLOOR) && (map[x][y] != PLAYER))
 			{
 				printf("Error: Invalid character '%c' in map\n", map[x][y]);
@@ -48,6 +33,7 @@ int	check_wall(char **map)
 			}
 			y++;
 		}
+		y = 0;
 		x++;
 	}
 }
