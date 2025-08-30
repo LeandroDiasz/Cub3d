@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledias-d <ledias-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/29 20:29:24 by jpires-n          #+#    #+#             */
-/*   Updated: 2025/08/29 20:15:07 by ledias-d         ###   ########.fr       */
+/*   Created: 2025/08/29 19:13:54 by ledias-d          #+#    #+#             */
+/*   Updated: 2025/08/29 21:04:32 by ledias-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-
+#ifndef MAP_H
+# define MAP_H
 # include "cub3d.h"
 
-# define WALL '1'
-# define FLOOR '0'
-# define PLAYER_N 'N'
-# define PLAYER_S 'S'
-# define PLAYER_E 'E'
-# define PLAYER_W 'W'
-
-int	is_valid_neighbor(char c);
-int	check_neighbor(char **map, int x, int y);
-int	check_wall(char **map);
-int	check_elements(char **map);
+char	**file_read(char *file);
+int		count_lines(char *file);
+char	*get_next_line(int fd);
+int		cub_validate(char **file, t_cub3d *game);
+int		map_validate(char **map);
 
 #endif
