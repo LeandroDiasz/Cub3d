@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpires-n <jpires-n@student.42.fr>          #+#  +:+       +#+        */
+/*   By: ledias-d <ledias-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-29 19:23:37 by jpires-n          #+#    #+#             */
-/*   Updated: 2025-08-29 19:23:37 by jpires-n         ###   ########.rio      */
+/*   Created: 2025/08/29 19:23:37 by jpires-n          #+#    #+#             */
+/*   Updated: 2025/08/29 19:10:09 by ledias-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,12 @@ void	multi_free(void *first, ...)
 		ptr = va_arg(args, void *);
 	}
 	va_end(args);
+}
+
+void	error_exit(const char *message, char **to_free)
+{
+	if (to_free)
+		free_matriz(to_free);
+	write(1, message, ft_strlen(message));
+	exit(EXIT_FAILURE);
 }
