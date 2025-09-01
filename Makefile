@@ -3,14 +3,20 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MLX = -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm minilibx-linux/libmlx.a $(LIBFT_LIB)
 
-
 LIBFT_DIR = Libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
 SRC_DIR = src/
-MAP_DIR = $(SRC_DIR)map
+PARSER_DIR = $(SRC_DIR)parser/
 
-SRC = main.c
+SRC = $(PARSER_DIR)dfs.c \
+	$(PARSER_DIR)file_utils.c \
+	$(PARSER_DIR)gnl.c \
+	$(PARSER_DIR)init_prop.c \
+	$(PARSER_DIR)parser_utils.c \
+	$(SRC_DIR)free.c \
+	$(SRC_DIR)game.c \
+	main.c
 OBJ = $(SRC:.c=.o)
 
 GREEN = \033[0;32m
