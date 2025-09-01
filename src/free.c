@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ledias-d <ledias-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 19:23:37 by jpires-n          #+#    #+#             */
-/*   Updated: 2025/08/29 19:10:09 by ledias-d         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:50:35 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,19 @@ void	error_exit(const char *message, char **to_free)
 		free_matriz(to_free);
 	write(1, message, ft_strlen(message));
 	exit(EXIT_FAILURE);
+}
+
+void	free_matriz(char **matriz)
+{
+	int	i;
+
+	if (!matriz)
+		return ;
+	i = 0;
+	while (matriz[i])
+	{
+		free(matriz[i]);
+		i++;
+	}
+	free(matriz);
 }
