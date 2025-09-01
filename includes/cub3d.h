@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ledias-d <ledias-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:57:26 by leandrodias       #+#    #+#             */
-/*   Updated: 2025/08/29 19:48:07 by ledias-d         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:44:38 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <math.h>
-# include "parser.h"
-# include "map.h"
 
 # define BUFFER_SIZE 1024
 # define WIN_NAME "Cub3D"
@@ -37,6 +35,12 @@
 # define KEY_ARROW_UP 119
 # define KEY_ARROW_DOWN 115
 
+# define WALL '1'
+# define FLOOR '0'
+# define PLAYER_N 'N'
+# define PLAYER_S 'S'
+# define PLAYER_E 'E'
+# define PLAYER_W 'W'
 
 typedef struct s_cub3d
 {
@@ -61,8 +65,24 @@ typedef struct s_cub3d
 	int		ceiling_rgb;
 }	t_cub3d;
 
+//--src/ --
+
 int		init_cub3d(t_cub3d *game, char *file);
 int		start_game(t_cub3d *game);
 void	multi_free(void *first, ...);
+void	free_matriz(char **matriz);
+void	error_exit(const char *message, char **to_free);
+
+//--parser/ --
+
+int		check_ext(const char *file);
+char	**dup_map(char **map);
+int		find_player(char **map, int *x, int *y);
+char	**file_read(char *file);
+int		count_lines(char *file);
+char	*get_next_line(int fd);
+int		cub_validate(char **file, t_cub3d *game);
+int		map_validate(char **map);
+
 
 #endif
