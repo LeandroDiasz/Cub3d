@@ -43,4 +43,7 @@ fclean: clean
 	printf "${YELLOW}⚠️  Executável e libft limpos.${NC}\n"
 re: fclean all
 
+valgrind: re
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) mapa.cub
+
 .PHONY: all clean fclean re
