@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ledias-d <ledias-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:52:19 by leandrodias       #+#    #+#             */
-/*   Updated: 2025/09/01 17:50:55 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/13 18:25:37 by ledias-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+static void	init_struct(t_cub3d *game)
+{
+	game->mlx = NULL;
+	game->win = NULL;
+	game->width = 0;
+	game->height = 0;
+	game->map = NULL;
+	game->file = NULL;
+	game->player_x = 0;
+	game->player_y = 0;
+	game->player_dir = -1;
+	game->map_width = 0;
+	game->map_height = 0;
+	game->no_texture = NULL;
+	game->so_texture = NULL;
+	game->we_texture = NULL;
+	game->ea_texture = NULL;
+	game->floor_color = NULL;
+	game->ceiling_color = NULL;
+	game->floor_rgb = -1;
+	game->ceiling_rgb = -1;
+}
 
 int	init_cub3d(t_cub3d *game, char *file)
 {
@@ -19,13 +42,23 @@ int	init_cub3d(t_cub3d *game, char *file)
 
 	player_x = 0;
 	player_y = 0;
+	init_struct(game);
 	game->file = file_read(file);
 	if (!game->file)
-		error_exit("Error reading the file", game->map);
+	{
+		cleanup_game(game);
+		error_exit("Error reading the file", NULL);
+	}
 	if (!cub_validate(game->file, game))
-		error_exit("Invalid file", game->file);
+	{
+		cleanup_game(game);
+		error_exit("Invalid file", NULL);
+	}
 	if (!map_validate(game->map))
-		error_exit("Invalid map", game->map);
+	{
+		cleanup_game(game);
+		error_exit("Invalid map", NULL);
+	}
 	find_player(game->map, &player_y, &player_x);
 	game->player_x = player_x;
 	game->player_y = player_y;
