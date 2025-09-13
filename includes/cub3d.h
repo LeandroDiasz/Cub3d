@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ledias-d <ledias-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:57:26 by leandrodias       #+#    #+#             */
-/*   Updated: 2025/09/01 17:44:38 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/13 18:25:37 by ledias-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int		start_game(t_cub3d *game);
 void	multi_free(void *first, ...);
 void	free_matriz(char **matriz);
 void	error_exit(const char *message, char **to_free);
+void	cleanup_game(t_cub3d *game);
 
 //--parser/ --
 
